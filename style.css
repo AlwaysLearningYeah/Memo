@@ -6,6 +6,7 @@
 [href].rainbow:hover,
 [href].rainbow:active{
     animation: rainbow 2s linear infinite;
+    font-style: italic;
 }
 
 @keyframes rainbow{
