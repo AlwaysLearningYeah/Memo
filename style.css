@@ -10,8 +10,20 @@
     margin: 24px 0 0;
 
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
     gap: 16px;
+}
+
+@media (min-width: 501px) and (max-width: 900px){
+    .memo-list ul{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 901px){
+    .memo-list ul{
+        grid-template-columns:  repeat(3, 1fr);
+    }
 }
 
 .memo-item{
