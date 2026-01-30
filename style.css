@@ -1,3 +1,10 @@
+.contatiner{
+    display: grid;
+    grid-template-columns: repaet(3, 1fr);
+    gap: 16px;
+}
+
+
 [href]{
     color:black;
     text-decoration:none;
