@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>삼각함수 암기용 한페이지</title>
+<style>
+  @page { size: A4; margin: 18mm; }
+  body { font-family: "Noto Sans KR", "Helvetica Neue", Arial, sans-serif; color:#111; line-height:1.3; margin:0; padding:0; }
+  .page { width: 210mm; min-height: 297mm; padding:18mm; box-sizing: border-box; }
+  h1 { font-size:18px; margin: 0 0 8px 0; }
+  h2 { font-size:13px; margin: 12px 0 6px 0; }
+  p, li { font-size:11.5px; margin: 4px 0; }
+  .grid { display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+  .card { border: 1px solid #ddd; padding:8px 10px; border-radius:6px; background:#fff; box-shadow:0 0 0 0 rgba(0,0,0,0.03); }
+  .mono { font-family: "Courier New", monospace; font-size:11px; color:#222; }
+  .small { font-size:10px; color:#444; }
+  ul { padding-left:18px; margin:6px 0; }
+  .footer { margin-top:10px; font-size:10px; color:#444; }
+  .wide { grid-column: 1 / -1; }
+  .cols { display:flex; gap:10px; }
+  .col { flex:1; }
+  .boxed { border-left:4px solid #2b7cff; padding-left:8px; margin-bottom:6px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>삼각함수 핵심 한페이지 (선형대수 준비용)</h1>
+
+  <div class="grid">
+    <div class="card">
+      <h2>기본 값 (먼저 외울 것)</h2>
+      <p class="mono">0°=0, 30°=π/6, 45°=π/4, 60°=π/3, 90°=π/2</p>
+      <ul>
+        <li>sin30 = 1/2, cos30 = √3/2</li>
+        <li>sin45 = √2/2, cos45 = √2/2</li>
+        <li>sin60 = √3/2, cos60 = 1/2</li>
+        <li>sin0 = 0, cos0 = 1, sin90 = 1, cos90 = 0</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>기본 항등식</h2>
+      <ul>
+        <li>sin²θ + cos²θ = 1</li>
+        <li>tan θ = sin θ / cos θ  (cos≠0)</li>
+        <li>sec=1/cos, csc=1/sin, cot=1/tan</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>짝/홀·보각</h2>
+      <ul>
+        <li>sin(−θ) = −sin θ (홀함수)</li>
+        <li>cos(−θ) = cos θ (짝함수)</li>
+        <li>cos(π/2 − θ) = sin θ,  sin(π/2 − θ) = cos θ</li>
+        <li>cos(π − θ) = −cos θ, sin(π − θ) = sin θ</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>덧셈·뺄셈 공식 (자주 사용)</h2>
+      <ul>
+        <li>sin(α ± β) = sinα cosβ ± cosα sinβ</li>
+        <li>cos(α ± β) = cosα cosβ ∓ sinα sinβ</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>배각·반각</h2>
+      <ul>
+        <li>sin2θ = 2 sinθ cosθ</li>
+        <li>cos2θ = cos²θ − sin²θ = 2cos²θ − 1 = 1 − 2sin²θ</li>
+        <li>sin²(θ/2) = (1 − cosθ)/2,  cos²(θ/2) = (1 + cosθ)/2</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>합↔곱, 곱↔합 (유용)</h2>
+      <ul>
+        <li>2 sinα cosβ = sin(α+β) + sin(α−β)</li>
+        <li>2 cosα cosβ = cos(α+β) + cos(α−β)</li>
+        <li>sinα + sinβ = 2 sin((α+β)/2) cos((α−β)/2)</li>
+      </ul>
+    </div>
+
+    <div class="card wide">
+      <h2>선형대수에서 특히 자주 쓰이는 식</h2>
+      <div class="cols">
+        <div class="col">
+          <p class="boxed"><strong>내적 → 코사인</strong><br>
+          cos θ = (u · v) / (||u|| · ||v||)</p>
+          <p class="small">직교 ⇔ u·v = 0 ⇔ cosθ = 0</p>
+        </div>
+        <div class="col">
+          <p class="boxed"><strong>투영</strong><br>
+          proj_v(u) = (u·v)/(v·v) · v</p>
+          <p class="small">투영 길이 = ||u|| cosθ = (u·v)/||v||</p>
+        </div>
+      </div>
+      <p class="boxed" style="margin-top:8px"><strong>행렬식·외적과 사인</strong><br>
+        2D: det([u v]) = u1 v2 − u2 v1 = ||u||·||v||·sin θ<br>
+        3D: ||u × v|| = ||u||·||v||·sin θ</p>
+    </div>
+
+    <div class="card">
+      <h2>미적분 핵심</h2>
+      <ul>
+        <li>d/dx[sin x] = cos x,  d/dx[cos x] = −sin x</li>
+        <li>∫ sin x dx = −cos x + C,  ∫ cos x dx = sin x + C</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>작은각 근사·전개</h2>
+      <ul>
+        <li>작은 x(라디안): sin x ≈ x,  cos x ≈ 1 − x²/2</li>
+        <li>테일러: sin x = x − x³/3! + … , cos x = 1 − x²/2! + …</li>
+      </ul>
+    </div>
+
+    <div class="card wide">
+      <h2>암기 팁 & 요약</h2>
+      <ul>
+        <li>먼저 외울 것: 0°, 30°, 45°, 60°, 90° 값과 sin²+cos²=1</li>
+        <li>30‑60‑90 비율: 1 : √3 : 2 → sin30=1/2, cos30=√3/2</li>
+        <li>45‑45‑90 비율: 1 : 1 : √2 → sin45=cos45=√2/2</li>
+        <li>선형대수 핵심 공식: cosθ = (u·v)/(||u||·||v||), proj, det = ||u||·||v||·sinθ</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
