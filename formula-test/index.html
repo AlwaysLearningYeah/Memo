@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>삼각함수 테스트</title>
+<style>
+  body { font-family: "Noto Sans KR", "Helvetica Neue", Arial, sans-serif; color:#111; line-height:1.5; margin:0; padding:0; background:#f7f9fc; }
+  .container { max-width: 720px; margin: 0 auto; padding: 24px 16px; }
+  h1 { font-size: 20px; margin-bottom: 12px; }
+  h2 { font-size: 14px; margin: 20px 0 8px 0; color: #333; }
+  .card { border: 1px solid #ddd; padding: 12px 14px; border-radius: 8px; background: #fff; margin-bottom: 12px; }
+  .row { display: flex; align-items: center; padding: 6px 0; font-size: 14px; }
+  .question { white-space: nowrap; }
+  .answer { display: inline-block; min-width: 80px; margin-left: 4px; padding: 2px 10px; border-radius: 4px; background: #e8e8e8; color: transparent; cursor: pointer; user-select: none; transition: color 0.2s; }
+  .answer.revealed { color: #111; background: #d4edda; }
+  .controls { margin-bottom: 16px; display: flex; gap: 8px; }
+  .controls button { padding: 8px 16px; border: 1px solid #ccc; border-radius: 6px; background: #fff; cursor: pointer; font-size: 13px; }
+  .controls button:hover { background: #f0f0f0; }
+  .back-link { display: inline-block; margin-bottom: 16px; color: #2b7cff; text-decoration: none; font-size: 14px; }
+  .back-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="container">
+  <a href="../" class="back-link">← 메인으로</a>
+  <h1>삼각함수 테스트 (클릭하면 답이 보입니다)</h1>
+
+  <div class="controls">
+    <button onclick="revealAll()">전체 보기</button>
+    <button onclick="hideAll()">전체 숨기기</button>
+  </div>
+
+  <div class="card">
+    <h2>기본 값</h2>
+    <div class="row"><span class="question">sin0 =</span><span class="answer" onclick="toggle(this)">0</span></div>
+    <div class="row"><span class="question">cos0 =</span><span class="answer" onclick="toggle(this)">1</span></div>
+    <div class="row"><span class="question">sin30 =</span><span class="answer" onclick="toggle(this)">1/2</span></div>
+    <div class="row"><span class="question">cos30 =</span><span class="answer" onclick="toggle(this)">√3/2</span></div>
+    <div class="row"><span class="question">sin45 =</span><span class="answer" onclick="toggle(this)">√2/2</span></div>
+    <div class="row"><span class="question">cos45 =</span><span class="answer" onclick="toggle(this)">√2/2</span></div>
+    <div class="row"><span class="question">sin60 =</span><span class="answer" onclick="toggle(this)">√3/2</span></div>
+    <div class="row"><span class="question">cos60 =</span><span class="answer" onclick="toggle(this)">1/2</span></div>
+    <div class="row"><span class="question">sin90 =</span><span class="answer" onclick="toggle(this)">1</span></div>
+    <div class="row"><span class="question">cos90 =</span><span class="answer" onclick="toggle(this)">0</span></div>
+  </div>
+
+  <div class="card">
+    <h2>각도 → 라디안</h2>
+    <div class="row"><span class="question">0° =</span><span class="answer" onclick="toggle(this)">0</span></div>
+    <div class="row"><span class="question">30° =</span><span class="answer" onclick="toggle(this)">π/6</span></div>
+    <div class="row"><span class="question">45° =</span><span class="answer" onclick="toggle(this)">π/4</span></div>
+    <div class="row"><span class="question">60° =</span><span class="answer" onclick="toggle(this)">π/3</span></div>
+    <div class="row"><span class="question">90° =</span><span class="answer" onclick="toggle(this)">π/2</span></div>
+  </div>
+
+  <div class="card">
+    <h2>기본 항등식</h2>
+    <div class="row"><span class="question">sin²θ + cos²θ =</span><span class="answer" onclick="toggle(this)">1</span></div>
+    <div class="row"><span class="question">tan θ =</span><span class="answer" onclick="toggle(this)">sin θ / cos θ</span></div>
+    <div class="row"><span class="question">sec θ =</span><span class="answer" onclick="toggle(this)">1 / cos θ</span></div>
+    <div class="row"><span class="question">csc θ =</span><span class="answer" onclick="toggle(this)">1 / sin θ</span></div>
+    <div class="row"><span class="question">cot θ =</span><span class="answer" onclick="toggle(this)">1 / tan θ</span></div>
+  </div>
+
+  <div class="card">
+    <h2>짝/홀·보각</h2>
+    <div class="row"><span class="question">sin(−θ) =</span><span class="answer" onclick="toggle(this)">−sin θ</span></div>
+    <div class="row"><span class="question">cos(−θ) =</span><span class="answer" onclick="toggle(this)">cos θ</span></div>
+    <div class="row"><span class="question">cos(π/2 − θ) =</span><span class="answer" onclick="toggle(this)">sin θ</span></div>
+    <div class="row"><span class="question">sin(π/2 − θ) =</span><span class="answer" onclick="toggle(this)">cos θ</span></div>
+    <div class="row"><span class="question">cos(π − θ) =</span><span class="answer" onclick="toggle(this)">−cos θ</span></div>
+    <div class="row"><span class="question">sin(π − θ) =</span><span class="answer" onclick="toggle(this)">sin θ</span></div>
+  </div>
+
+  <div class="card">
+    <h2>덧셈·뺄셈 공식</h2>
+    <div class="row"><span class="question">sin(α + β) =</span><span class="answer" onclick="toggle(this)">sinα cosβ + cosα sinβ</span></div>
+    <div class="row"><span class="question">sin(α − β) =</span><span class="answer" onclick="toggle(this)">sinα cosβ − cosα sinβ</span></div>
+    <div class="row"><span class="question">cos(α + β) =</span><span class="answer" onclick="toggle(this)">cosα cosβ − sinα sinβ</span></div>
+    <div class="row"><span class="question">cos(α − β) =</span><span class="answer" onclick="toggle(this)">cosα cosβ + sinα sinβ</span></div>
+  </div>
+
+  <div class="card">
+    <h2>배각·반각</h2>
+    <div class="row"><span class="question">sin2θ =</span><span class="answer" onclick="toggle(this)">2 sinθ cosθ</span></div>
+    <div class="row"><span class="question">cos2θ =</span><span class="answer" onclick="toggle(this)">cos²θ − sin²θ = 2cos²θ − 1 = 1 − 2sin²θ</span></div>
+    <div class="row"><span class="question">sin²(θ/2) =</span><span class="answer" onclick="toggle(this)">(1 − cosθ) / 2</span></div>
+    <div class="row"><span class="question">cos²(θ/2) =</span><span class="answer" onclick="toggle(this)">(1 + cosθ) / 2</span></div>
+  </div>
+
+  <div class="card">
+    <h2>합↔곱, 곱↔합</h2>
+    <div class="row"><span class="question">2 sinα cosβ =</span><span class="answer" onclick="toggle(this)">sin(α+β) + sin(α−β)</span></div>
+    <div class="row"><span class="question">2 cosα cosβ =</span><span class="answer" onclick="toggle(this)">cos(α+β) + cos(α−β)</span></div>
+    <div class="row"><span class="question">sinα + sinβ =</span><span class="answer" onclick="toggle(this)">2 sin((α+β)/2) cos((α−β)/2)</span></div>
+  </div>
+
+  <div class="card">
+    <h2>선형대수 핵심</h2>
+    <div class="row"><span class="question">cos θ (내적) =</span><span class="answer" onclick="toggle(this)">(u · v) / (‖u‖ · ‖v‖)</span></div>
+    <div class="row"><span class="question">직교 조건: u · v =</span><span class="answer" onclick="toggle(this)">0</span></div>
+    <div class="row"><span class="question">proj_v(u) =</span><span class="answer" onclick="toggle(this)">(u·v)/(v·v) · v</span></div>
+    <div class="row"><span class="question">투영 길이 =</span><span class="answer" onclick="toggle(this)">‖u‖ cosθ = (u·v)/‖v‖</span></div>
+    <div class="row"><span class="question">2D det([u v]) =</span><span class="answer" onclick="toggle(this)">u1 v2 − u2 v1 = ‖u‖·‖v‖·sin θ</span></div>
+    <div class="row"><span class="question">3D ‖u × v‖ =</span><span class="answer" onclick="toggle(this)">‖u‖·‖v‖·sin θ</span></div>
+  </div>
+
+  <div class="card">
+    <h2>미적분 핵심</h2>
+    <div class="row"><span class="question">d/dx[sin x] =</span><span class="answer" onclick="toggle(this)">cos x</span></div>
+    <div class="row"><span class="question">d/dx[cos x] =</span><span class="answer" onclick="toggle(this)">−sin x</span></div>
+    <div class="row"><span class="question">∫ sin x dx =</span><span class="answer" onclick="toggle(this)">−cos x + C</span></div>
+    <div class="row"><span class="question">∫ cos x dx =</span><span class="answer" onclick="toggle(this)">sin x + C</span></div>
+  </div>
+
+  <div class="card">
+    <h2>작은각 근사</h2>
+    <div class="row"><span class="question">sin x ≈ (작은 x) </span><span class="answer" onclick="toggle(this)">x</span></div>
+    <div class="row"><span class="question">cos x ≈ (작은 x) </span><span class="answer" onclick="toggle(this)">1 − x²/2</span></div>
+  </div>
+
+  <div class="card">
+    <h2>암기 팁</h2>
+    <div class="row"><span class="question">30-60-90 삼각형 변의 비 =</span><span class="answer" onclick="toggle(this)">1 : √3 : 2</span></div>
+    <div class="row"><span class="question">45-45-90 삼각형 변의 비 =</span><span class="answer" onclick="toggle(this)">1 : 1 : √2</span></div>
+  </div>
+
+</div>
+
+<script>
+function toggle(el) {
+  el.classList.toggle('revealed');
+}
+function revealAll() {
+  document.querySelectorAll('.answer').forEach(function(el) {
+    el.classList.add('revealed');
+  });
+}
+function hideAll() {
+  document.querySelectorAll('.answer').forEach(function(el) {
+    el.classList.remove('revealed');
+  });
+}
+</script>
+</body>
+</html>
