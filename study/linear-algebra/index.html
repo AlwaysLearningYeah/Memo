@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>선형대수 핵심 공식 정리</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"/>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<style>
+  @page { size: A4; margin: 18mm; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Noto Sans KR", "Helvetica Neue", Arial, sans-serif;
+    color: #111; line-height: 1.5; margin: 0; padding: 0;
+    background: #f5f7fa;
+  }
+  .page {
+    max-width: 960px; margin: 0 auto; padding: 24px 16px;
+  }
+  h1 {
+    font-size: 22px; margin: 0 0 4px 0; color: #1a1a2e;
+  }
+  .subtitle {
+    font-size: 13px; color: #666; margin-bottom: 16px;
+  }
+  .back-link {
+    display: inline-block; margin-bottom: 12px;
+    font-size: 13px; color: #2b7cff; text-decoration: none;
+  }
+  .back-link:hover { text-decoration: underline; }
+
+  /* Priority badges */
+  .badge {
+    display: inline-block; padding: 2px 8px; border-radius: 10px;
+    font-size: 11px; font-weight: 700; color: #fff; margin-left: 6px;
+    vertical-align: middle;
+  }
+  .badge-a { background: #e53e3e; }
+  .badge-b { background: #dd6b20; }
+  .badge-c { background: #718096; }
+
+  /* Section */
+  .section {
+    margin-bottom: 20px;
+  }
+  .section-title {
+    font-size: 15px; font-weight: 700; margin: 0 0 10px 0;
+    padding: 6px 12px; border-radius: 8px;
+    background: #1a1a2e; color: #fff;
+  }
+
+  /* Card grid */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media (max-width: 640px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+  .card {
+    border: 1px solid #ddd; padding: 12px 14px; border-radius: 8px;
+    background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .card h3 {
+    font-size: 13px; margin: 0 0 6px 0; color: #2b7cff;
+  }
+  .card p, .card li {
+    font-size: 12.5px; margin: 4px 0;
+  }
+  .card ul, .card ol {
+    padding-left: 18px; margin: 6px 0;
+  }
+  .wide { grid-column: 1 / -1; }
+
+  /* Highlighted box */
+  .highlight {
+    border-left: 4px solid #2b7cff; padding: 8px 12px;
+    background: #eef4ff; border-radius: 0 6px 6px 0;
+    margin: 8px 0;
+  }
+  .highlight-red {
+    border-left: 4px solid #e53e3e; padding: 8px 12px;
+    background: #fff5f5; border-radius: 0 6px 6px 0;
+    margin: 8px 0;
+  }
+
+  /* Cheat sheet box */
+  .cheatsheet {
+    background: #fffbea; border: 2px solid #ecc94b;
+    border-radius: 8px; padding: 14px 16px; margin-top: 12px;
+  }
+  .cheatsheet h3 {
+    color: #b7791f; margin: 0 0 8px 0; font-size: 14px;
+  }
+
+  /* Tip box */
+  .tip {
+    background: #f0fff4; border: 1px solid #c6f6d5;
+    border-radius: 8px; padding: 12px 14px; margin-top: 12px;
+  }
+  .tip h3 {
+    color: #276749; margin: 0 0 6px 0; font-size: 13px;
+  }
+
+  .small { font-size: 11px; color: #666; }
+
+  /* Equivalence chain */
+  .equiv-chain {
+    background: #faf5ff; border: 1px solid #e9d8fd;
+    border-radius: 8px; padding: 12px 14px;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <a href="../../" class="back-link">← 메인으로</a>
+  <h1>📐 선형대수 핵심 공식 정리</h1>
+  <p class="subtitle">1장~현재 범위 · 우선순위별 정리 · 암기용</p>
+
+  <!-- ===== 0. 핵심 10개 ===== -->
+  <div class="section">
+    <div class="section-title">🔥 0. 제일 먼저 — 핵심 10개</div>
+    <div class="cheatsheet">
+      <h3>이 10개는 반드시 기억하세요!</h3>
+      <ol>
+        <li>$Ax = b$</li>
+        <li>$Ax = 0$ (동차식)</li>
+        <li>$A \to \text{echelon form} \to \text{rref}(A)$</li>
+        <li>$\operatorname{rank}(A) = \text{pivot 수}$</li>
+        <li>$\text{nullity}(A) = n - \operatorname{rank}(A)$</li>
+        <li>$\dim N(A) = n - r$</li>
+        <li>$\dim C(A) = r$</li>
+        <li>$A = CR$</li>
+        <li>$A = LU$</li>
+        <li>$\det\begin{bmatrix}a & b \\ c & d\end{bmatrix} = ad - bc$</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ===== 1. 행렬과 선형시스템 ===== -->
+  <div class="section">
+    <div class="section-title">1. 행렬과 선형시스템 기본 <span class="badge badge-a">A급</span></div>
+    <div class="grid">
+      <div class="card">
+        <h3>1-1. 선형시스템 표현</h3>
+        <p>$$Ax = b$$</p>
+        <ul>
+          <li>$A$: 계수행렬, $x$: 미지수 벡터, $b$: 상수 벡터</li>
+        </ul>
+        <p>동차식: $Ax = 0$</p>
+      </div>
+      <div class="card">
+        <h3>1-2. 열의 관점 ⭐</h3>
+        <div class="highlight-red">
+          <p>$$Ax = x_1 a_1 + x_2 a_2 + \cdots + x_n a_n$$</p>
+        </div>
+        <p>→ $Ax$는 $A$의 열벡터들의 <strong>선형결합</strong></p>
+        <p>→ $Ax = b$는 "$b$가 $A$의 열들의 선형결합으로 표현되는가?"를 묻는 것</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 2. 가우스 소거 ===== -->
+  <div class="section">
+    <div class="section-title">2. 가우스 소거 <span class="badge badge-a">A급</span></div>
+    <div class="grid">
+      <div class="card">
+        <h3>2-1. 세 가지 행 연산 (ERO)</h3>
+        <ol>
+          <li>두 행 교환</li>
+          <li>한 행에 $c \ne 0$ 상수배</li>
+          <li>한 행에 다른 행의 배를 더하기</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>2-2. Echelon Form 조건</h3>
+        <ul>
+          <li>0이 아닌 행은 0행 위에</li>
+          <li>각 행의 leading entry는 아래로 갈수록 오른쪽</li>
+          <li>피벗 아래는 0</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>2-3. RREF 조건</h3>
+        <p>Echelon form 조건 <strong>+</strong></p>
+        <ul>
+          <li>각 피벗은 <strong>1</strong></li>
+          <li>피벗 열의 나머지 성분은 모두 <strong>0</strong></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>2-4. Pivot / Free Variable</h3>
+        <ul>
+          <li><strong>pivot column</strong> ↔ pivot variable</li>
+          <li><strong>non-pivot column</strong> ↔ free variable</li>
+        </ul>
+        <p class="small">→ 이 구분이 해의 구조를 결정합니다</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 3. Rank / Nullity ===== -->
+  <div class="section">
+    <div class="section-title">3. Rank · Nullity · Pivot <span class="badge badge-a">A급</span></div>
+    <div class="grid">
+      <div class="card">
+        <h3>3-1. Rank</h3>
+        <p>$$r = \operatorname{rank}(A) = \text{pivot 수}$$</p>
+      </div>
+      <div class="card">
+        <h3>3-2. Nullity</h3>
+        <p>$$\text{nullity}(A) = n - r$$</p>
+        <p class="small">자유변수 개수 = 열 개수 − pivot 개수</p>
+      </div>
+      <div class="card">
+        <h3>3-3. Null Space 차원</h3>
+        <p>$$\dim N(A) = n - r$$</p>
+      </div>
+      <div class="card">
+        <h3>3-4. Column / Row Space 차원</h3>
+        <p>$$\dim C(A) = r$$</p>
+        <p>$$\dim C(A^T) = r$$</p>
+        <p class="small">row space 차원도 rank와 동일</p>
+      </div>
+      <div class="card wide">
+        <h3>3-6. Rank-Nullity Theorem ⭐</h3>
+        <div class="highlight-red">
+          <p>$$\boxed{n = \operatorname{rank}(A) + \dim N(A)}$$</p>
+        </div>
+        <p>→ <strong>반드시</strong> 외우세요!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 4. 해의 존재/유일성 ===== -->
+  <div class="section">
+    <div class="section-title">4. 해의 존재 · 유일성 판정 <span class="badge badge-a">A급</span></div>
+    <div class="grid">
+      <div class="card">
+        <h3>4-1. $Ax = 0$ (동차식)</h3>
+        <ul>
+          <li>항상 $x = 0$ 해 존재 (trivial solution)</li>
+          <li>$n > r$ → 자유변수 있음 → <strong>nonzero solution 존재</strong></li>
+          <li>$n = r$ → 자유변수 없음 → only trivial solution</li>
+        </ul>
+        <div class="highlight">
+          <p>$n > m \Rightarrow$ rank $\le m < n$ → 항상 nonzero solution!</p>
+        </div>
+      </div>
+      <div class="card">
+        <h3>4-2. $Ax = b$ 해 존재 조건</h3>
+        <div class="highlight">
+          <p>$$b \in \operatorname{Col}(A)$$</p>
+        </div>
+        <p>→ $b$가 $A$의 열공간에 있어야 해가 존재</p>
+        <h3 style="margin-top:10px">4-3. 유일해 조건</h3>
+        <ul>
+          <li>해 존재 + 자유변수 없음 ($n = r$)</li>
+          <li>정사각행렬이면: $r = n$ → 유일해</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 5. Inverse ===== -->
+  <div class="section">
+    <div class="section-title">5. 역행렬 (Inverse) <span class="badge badge-a">A급</span></div>
+    <div class="grid">
+      <div class="card">
+        <h3>5-1. 정의</h3>
+        <p>$$AA^{-1} = A^{-1}A = I$$</p>
+      </div>
+      <div class="card">
+        <h3>5-2. 2×2 역행렬 공식 ⭐</h3>
+        <div class="highlight-red">
+          <p>$$A^{-1} = \frac{1}{ad-bc}\begin{bmatrix}d & -b \\ -c & a\end{bmatrix}$$</p>
+        </div>
+        <p class="small">단, $\det A = ad - bc \ne 0$</p>
+      </div>
+      <div class="card wide">
+        <h3>5-3. Invertible Matrix Theorem ⭐⭐</h3>
+        <div class="equiv-chain">
+          <p>정사각행렬 $A$에 대해 다음은 모두 <strong>동치</strong>:</p>
+          <ul>
+            <li>$A$ is invertible ($A^{-1}$ 존재)</li>
+            <li>$\det(A) \ne 0$</li>
+            <li>$\operatorname{rank}(A) = n$</li>
+            <li>$\text{rref}(A) = I$</li>
+            <li>$Ax = 0$ has only trivial solution</li>
+            <li>$Ax = b$ has a unique solution for every $b$</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 6. Determinant ===== -->
+  <div class="section">
+    <div class="section-title">6. Determinant <span class="badge badge-a">A급</span> ~ <span class="badge badge-b">B급</span></div>
+    <div class="grid">
+      <div class="card">
+        <h3>6-1. 2×2</h3>
+        <div class="highlight-red">
+          <p>$$\det\begin{bmatrix}a & b \\ c & d\end{bmatrix} = ad - bc$$</p>
+        </div>
+      </div>
+      <div class="card">
+        <h3>6-2. 3×3</h3>
+        <p>$$\det\begin{bmatrix}a&b&c\\d&e&f\\g&h&i\end{bmatrix} = aei+bfg+cdh-ceg-bdi-afh$$</p>
+        <p class="small">또는 cofactor expansion 사용</p>
+      </div>
+      <div class="card">
+        <h3>6-3. 삼각행렬</h3>
+        <div class="highlight">
+          <p>$$\det(A) = \text{대각원소들의 곱}$$</p>
+        </div>
+        <p class="small">상삼각 · 하삼각 모두 해당</p>
+      </div>
+      <div class="card">
+        <h3>6-4. 행 연산 → det 변화</h3>
+        <ol>
+          <li>두 행 교환 → det <strong>부호 바뀜</strong></li>
+          <li>한 행에 $c$배 → det도 <strong>$c$배</strong></li>
+          <li>한 행에 다른 행의 배 더함 → det <strong>변화 없음</strong></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>6-5. 곱의 det</h3>
+        <p>$$\det(AB) = \det(A)\det(B)$$</p>
+      </div>
+      <div class="card">
+        <h3>6-6 · 6-7. 역행렬 / 전치</h3>
+        <p>$$\det(A^{-1}) = \frac{1}{\det(A)}$$</p>
+        <p>$$\det(A^T) = \det(A)$$</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 7. Transpose ===== -->
+  <div class="section">
+    <div class="section-title">7. 전치 (Transpose) <span class="badge badge-b">B급</span></div>
+    <div class="grid">
+      <div class="card">
+        <h3>기본 성질</h3>
+        <ul>
+          <li>$(A^T)^T = A$</li>
+          <li>$(A+B)^T = A^T + B^T$</li>
+          <li>$(cA)^T = cA^T$</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>곱의 전치 ⭐</h3>
+        <div class="highlight-red">
+          <p>$$(AB)^T = B^T A^T$$</p>
+        </div>
+        <p>→ <strong>순서가 뒤집힌다!</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 8. LU 분해 ===== -->
+  <div class="section">
+    <div class="section-title">8. LU 분해 <span class="badge badge-a">A급</span></div>
+    <div class="grid">
+      <div class="card">
+        <h3>8-1. 기본 형태</h3>
+        <p>$$A = LU$$</p>
+        <ul>
+          <li>$L$: lower triangular (하삼각)</li>
+          <li>$U$: upper triangular (상삼각)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>8-2. 의미 ⭐</h3>
+        <div class="highlight-red">
+          <p><strong>$U$는 소거 결과, $L$은 소거 기록</strong></p>
+        </div>
+        <h3 style="margin-top:10px">8-3. PLU</h3>
+        <p>피벗 교환이 필요하면:</p>
+        <p>$$PA = LU$$</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 9. CR 분해 ===== -->
+  <div class="section">
+    <div class="section-title">9. CR 분해 <span class="badge badge-a">A급</span></div>
+    <div class="grid">
+      <div class="card">
+        <h3>9-1. 기본 형태</h3>
+        <p>$$A = CR$$</p>
+        <ul>
+          <li>$C$: $A$의 independent columns</li>
+          <li>$R$: 각 열이 $C$의 열들로 표현되는 계수</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>9-2. 구조</h3>
+        <p>$A = [W \ \ H]$ 이면 $R = [I \ \ F]$</p>
+        <div class="highlight">
+          <p>$$H = WF$$</p>
+          <p>dependent columns = independent columns $\times F$</p>
+        </div>
+      </div>
+      <div class="card wide">
+        <h3>9-3. 핵심 해석 ⭐</h3>
+        <div class="highlight-red">
+          <p><strong>$C$는 basis 열들, $R$은 좌표 행렬</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 10. Null Space ===== -->
+  <div class="section">
+    <div class="section-title">10. Null Space <span class="badge badge-a">A급</span></div>
+    <div class="grid">
+      <div class="card">
+        <h3>10-1. 정의</h3>
+        <p>$$N(A) = \{x : Ax = 0\}$$</p>
+      </div>
+      <div class="card">
+        <h3>10-2. 일반해 표현</h3>
+        <p>$$x = s_1 v_1 + \cdots + s_k v_k$$</p>
+        <p class="small">$v_1, \dots, v_k$는 null space의 basis</p>
+      </div>
+      <div class="card">
+        <h3>10-3. 차원</h3>
+        <p>$$\dim N(A) = \text{free variable 수} = n - r$$</p>
+      </div>
+      <div class="card">
+        <h3>10-4. Special Solutions</h3>
+        <p>자유변수 하나를 <strong>1</strong>, 나머지를 <strong>0</strong>으로 두면</p>
+        <p>→ special solution을 얻고, 이들이 null space의 <strong>basis</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 11. Column/Row Space ===== -->
+  <div class="section">
+    <div class="section-title">11. 열공간 · 행공간 <span class="badge badge-a">A급</span></div>
+    <div class="grid">
+      <div class="card">
+        <h3>11-1. Column Space</h3>
+        <p>$$C(A) = \operatorname{span}\{\text{columns of } A\}$$</p>
+      </div>
+      <div class="card">
+        <h3>11-2. Pivot Columns ⭐</h3>
+        <div class="highlight-red">
+          <p><strong>pivot 위치는 rref에서 찾고,<br>basis 열은 원래 A에서 뽑는다!</strong></p>
+        </div>
+      </div>
+      <div class="card wide">
+        <h3>11-3. Row Space</h3>
+        <p>행공간의 basis = echelon form의 nonzero rows</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 12. 직교 ===== -->
+  <div class="section">
+    <div class="section-title">12. 직교 (Orthogonality) 기본 <span class="badge badge-c">C급</span></div>
+    <div class="grid">
+      <div class="card">
+        <h3>기본</h3>
+        <ul>
+          <li>내적: $x \cdot y = x^T y$</li>
+          <li>직교: $x^T y = 0$</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Fundamental Relation</h3>
+        <div class="highlight">
+          <p>$$N(A) \perp C(A^T)$$</p>
+        </div>
+        <p class="small">null space는 row space와 직교 — 나중에 매우 중요!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 13. 블록 소거 ===== -->
+  <div class="section">
+    <div class="section-title">13. 블록 소거 <span class="badge badge-c">C급</span></div>
+    <div class="grid">
+      <div class="card wide">
+        <h3>블록 소거 공식</h3>
+        <p>$$P_r A P_c = \begin{bmatrix} W & H \\ J & K \end{bmatrix}$$</p>
+        <p>$W$는 $r \times r$ 가역행렬일 때:</p>
+        <ul>
+          <li>$F = W^{-1}H$</li>
+          <li>$K = JW^{-1}H$</li>
+        </ul>
+        <p>최종:</p>
+        <p>$$\begin{bmatrix} W & H \\ J & K \end{bmatrix} \to \begin{bmatrix} I & F \\ 0 & 0 \end{bmatrix}$$</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 14. 동치 조건 세트 ===== -->
+  <div class="section">
+    <div class="section-title">14. 정사각행렬 동치 조건 (세트 암기) <span class="badge badge-a">A급</span></div>
+    <div class="grid">
+      <div class="card wide">
+        <div class="equiv-chain">
+          <p>$A \in \mathbb{R}^{n \times n}$ 에 대해:</p>
+          <p>$$\det(A) \ne 0 \iff A^{-1} \text{ exists} \iff \operatorname{rank}(A) = n \iff \text{rref}(A) = I$$</p>
+          <p>$$\iff Ax=0 \text{ has only } x=0 \iff Ax=b \text{ has unique solution for all } b$$</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 암기 묶음 ===== -->
+  <div class="section">
+    <div class="section-title">💡 암기 묶음 (세트로 외우기)</div>
+    <div class="grid">
+      <div class="card">
+        <h3>묶음 1: Rank-Nullity</h3>
+        <ul>
+          <li>$r = \text{pivot 수}$</li>
+          <li>$\dim N(A) = n - r$</li>
+          <li>$n = r + \dim N(A)$</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>묶음 2: Invertible</h3>
+        <p>$A^{-1}$ exists $\iff \det(A) \ne 0$</p>
+        <p>$\iff r = n \iff \text{rref}(A) = I$</p>
+      </div>
+      <div class="card">
+        <h3>묶음 3: CR 분해</h3>
+        <ul>
+          <li>$A = CR$</li>
+          <li>$C$ = 원래 $A$의 pivot columns</li>
+          <li>$R$ = 계수 행렬</li>
+          <li>$H = WF$, $F = W^{-1}H$</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>묶음 4: Determinant</h3>
+        <ul>
+          <li>$\det\begin{bmatrix}a&b\\c&d\end{bmatrix} = ad-bc$</li>
+          <li>$\det(AB) = \det(A)\det(B)$</li>
+          <li>$\det(A^T) = \det(A)$</li>
+          <li>$\det(A^{-1}) = \frac{1}{\det(A)}$</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 최종 치트시트 ===== -->
+  <div class="section">
+    <div class="section-title">📋 최종 치트시트 — 최소한 이것만은!</div>
+    <div class="cheatsheet">
+      <h3>A4 한 장 압축본</h3>
+      <ol>
+        <li>$Ax = x_1 a_1 + \cdots + x_n a_n$ → 열의 선형결합</li>
+        <li>$r = \operatorname{rank}(A) = \text{pivot 수}$</li>
+        <li>$\dim N(A) = n - r$</li>
+        <li>$n = r + \dim N(A)$ → Rank-Nullity Theorem</li>
+        <li>$A = CR$ → $C$는 basis 열, $R$은 좌표 행렬</li>
+        <li>$A = LU$ → $U$는 소거 결과, $L$은 소거 기록</li>
+        <li>$\det\begin{bmatrix}a&b\\c&d\end{bmatrix} = ad - bc$</li>
+        <li>$A^{-1} = \frac{1}{ad-bc}\begin{bmatrix}d&-b\\-c&a\end{bmatrix}$</li>
+        <li>$\det(A) \ne 0 \iff A^{-1}$ exists $\iff \text{rref}(A) = I$</li>
+        <li><strong>pivot 위치는 rref에서 찾고, basis 열은 원래 A에서 뽑는다</strong></li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ===== 우선순위 가이드 ===== -->
+  <div class="section">
+    <div class="section-title">🎯 암기 우선순위 가이드</div>
+    <div class="grid">
+      <div class="card">
+        <h3><span class="badge badge-a">A급</span> 무조건 외우기</h3>
+        <ol>
+          <li>$Ax = x_1a_1 + \cdots + x_na_n$</li>
+          <li>$\operatorname{rank}(A) = \text{pivot 수}$</li>
+          <li>$\dim N(A) = n - r$</li>
+          <li>$n = r + \dim N(A)$</li>
+          <li>$A = CR$</li>
+          <li>$A = LU$</li>
+          <li>$\det\begin{bmatrix}a&b\\c&d\end{bmatrix} = ad-bc$</li>
+          <li>2×2 역행렬 공식</li>
+          <li>정사각행렬의 가역 동치조건</li>
+          <li>pivot 위치는 rref / basis 열은 원래 A</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3><span class="badge badge-b">B급</span> 매우 중요</h3>
+        <ol>
+          <li>$\det(AB) = \det(A)\det(B)$</li>
+          <li>$(AB)^T = B^T A^T$</li>
+          <li>$\det(A^T) = \det(A)$</li>
+          <li>삼각행렬 det = 대각곱</li>
+          <li>행연산이 det에 미치는 영향</li>
+          <li>$H = WF$</li>
+          <li>$F = W^{-1}H$</li>
+        </ol>
+        <h3 style="margin-top:12px"><span class="badge badge-c">C급</span> 익숙해지기</h3>
+        <ol>
+          <li>블록 소거 공식</li>
+          <li>$K = JW^{-1}H$</li>
+          <li>$PA = LU$</li>
+          <li>$N(A) \perp C(A^T)$</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 암기 팁 ===== -->
+  <div class="tip">
+    <h3>💡 암기 팁</h3>
+    <p>그냥 줄줄 외우면 오래 안 갑니다. <strong>묶음으로</strong> 외우세요!</p>
+    <ul>
+      <li><strong>계산용 공식</strong> — 직접 계산에 쓰는 것 (det, inverse, rank 계산)</li>
+      <li><strong>구조 이해 공식</strong> — 왜 그런지 이해하는 것 (열의 관점, CR, LU)</li>
+      <li><strong>판정 공식</strong> — 조건을 체크하는 것 (가역 동치, 해의 존재/유일성)</li>
+    </ul>
+  </div>
+
+  <p style="text-align:center; margin-top:24px; color:#999; font-size:11px;">
+    선형대수 1장~현재 범위 · 공식 정리
+  </p>
+</div>
+</body>
+</html>
